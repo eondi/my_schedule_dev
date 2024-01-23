@@ -1,5 +1,6 @@
 package com.sprata.my_schedule.controller;
 
+import com.sprata.my_schedule.Exception.PwNotFoundException;
 import com.sprata.my_schedule.dto.ScheduleRequestDto;
 import com.sprata.my_schedule.dto.ScheduleResponseDto;
 import com.sprata.my_schedule.entity.Schedule;
@@ -99,11 +100,13 @@ public class ScheduleController  {
     // 비밀번호 확인
     public List<ScheduleResponseDto> checkPw(String pw) throws IllegalAccessException {
         List<ScheduleResponseDto> temp_list = scheduleList.values().stream().filter(schedule -> schedule.getPw().equals(pw)).map(ScheduleResponseDto::new).toList();
-        if (temp_list != null) {
+        if (!temp_list.isEmpty()) {
             return temp_list;
         }else {
-            throw new IllegalAccessException(" 해당 비밀번호가 존재하지않습니다");
+            throw new IllegalAccessException(" 해당 비밀번호가 틀렸습니다");
+            //throw new PwNotFoundException(pw);
         }
     }
+
 
 }
