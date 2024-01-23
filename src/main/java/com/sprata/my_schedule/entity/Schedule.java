@@ -5,15 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class Schedule {
+    private Integer number;
     private String title;
     private String text;
     private String manager;
     private String pw;
-    private String date;
+    private Date date;
 
     public Schedule(ScheduleRequestDto requestDto) {
         this.title = requestDto.getTitle();
@@ -23,5 +26,11 @@ public class Schedule {
         this.date = requestDto.getDate();
 
 
+    }
+
+    public void update(ScheduleRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.text = requestDto.getText();
+        this.manager = requestDto.getManager();
     }
 }
